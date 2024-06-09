@@ -2,17 +2,18 @@ const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
-const port = 3000;
+require('dotenv').config();
+const port = process.env.PORT || 3000;
 
 // Serve the static files from the "public" folder in the React app
 app.use(express.static(path.join(__dirname, 'build')));
 
 // Create a MySQL database connection
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'pinnacle',
-    database: 'lexiquiz'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
 // Connect to the MySQL database
